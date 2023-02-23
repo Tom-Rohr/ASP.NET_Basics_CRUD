@@ -30,9 +30,13 @@ namespace Jokes_CRUD.Controllers
         // GET: Jokes/ShowSearchForm
         public async Task<IActionResult> ShowSearchForm()
         {
-            return View();//_context.Joke != null ?
-                        //View(await _context.Joke.ToListAsync()) :
-                        //Problem("Entity set 'ApplicationDbContext.Joke'  is null.");
+            return View();
+        }
+
+        // POST: Jokes/ShowSearchResults
+        public async Task<IActionResult> ShowSearchResults(string SearchPhrase)
+        {
+            return View("Index", await _context.Joke.Where(j => j.JokeQuestion.Contains(SearchPhrase)).ToListAsync());
         }
 
         // GET: Jokes/Details/5
